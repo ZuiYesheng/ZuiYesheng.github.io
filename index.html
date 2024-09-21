@@ -196,6 +196,130 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/17/First_Post/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="醉晔生">
+      <meta itemprop="description" content="如果拘泥于真假，那不是就错过了很多美好和感动嘛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="醉晔生的学习记录">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/17/First_Post/" class="post-title-link" itemprop="url">关于linux云服务器图形化界面部署</a>
+        </h2>
+
+        <div class="post-meta">
+
+          
+           <i class="fa fa-thumb-tack"></i>
+           <font color=7D26CD>置顶</font>
+           <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-09-17 16:26:00 / 修改时间：16:32:10" itemprop="dateCreated datePublished" datetime="2024-09-17T16:26:00+08:00">2024-09-17</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在云服务器上，通常默认情况下是以命令行界面（CLI）方式进行管理的，特别是在使用像阿里云这样的云服务提供商时。虽然大多数云服务器主要通过命令行进行操作，但您仍然可以通过以下几种方式访问图形用户界面（GUI）：</p>
+<ol>
+<li><p><strong>安装桌面环境</strong>:</p>
+<ul>
+<li>您可以在云服务器上安装一个桌面环境（如 GNOME、KDE 等）。以下是安装 GNOME 桌面环境的示例命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf groupinstall <span class="string">&quot;Server with GUI&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li>安装完成后，您可以使用以下命令启动图形界面：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl set-default graphical.target</span><br><span class="line">systemctl reboot</span><br></pre></td></tr></table></figure>
+<img src="/image.png" alt="alt text"><br>初次安装完程序需要较长时间的响应等待，如果长时间未响应以下是一些措施可以帮助您解决问题：</li>
+</ul>
+<ol>
+<li><p><strong>等待数分钟</strong>: 服务器重启可能需要一些时间，尤其是在有大量更新或更改的情况下。确保给机器足够的时间完成重启进程。</p>
+</li>
+<li><p><strong>重新连接</strong>: 如果您是通过 SSH 连接到服务器的，等待一段时间后尝试重新连接。重启过程中，您的连接会被中断，因此可以尝试再次连接上去。</p>
+</li>
+<li><p><strong>使用管理控制面板</strong>: 如果您使用的是阿里云或其他云服务提供商，您可能可以通过提供的管理控制面板直接访问服务器的重启状态或重新启动服务器。</p>
+</li>
+<li><p><strong>监控功能</strong>: 大多数云服务包括控制台访问功能（如通过管理页面的VNC控制台），以便在无法通过SSH进入时进行基本的系统管理和监控。登录到您的云服务商的仪表板来检查服务器日志或状态。</p>
+</li>
+<li><p><strong>检查云提供商状态</strong>: 查看是否有任何关于云服务商的中断或性能问题的公告。</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>如果以上步骤都不能解决问题，您可能需要联系您云服务的技术支持团队以进一步调查服务器的当前状态。</p>
+<ol start="2">
+<li><p><strong>使用远程桌面协议（RDP）</strong>:</p>
+<ul>
+<li>安装桌面环境后，您可以安装 RDP 服务器（如 xrdp）以便通过 RDP 客户端连接：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dnf install xrdp</span><br><span class="line">systemctl <span class="built_in">enable</span> xrdp</span><br><span class="line">systemctl start xrdp</span><br></pre></td></tr></table></figure></li>
+<li>然后，您可以使用 Windows 的远程桌面连接工具或其他 RDP 客户端连接到您的云服务器。</li>
+</ul>
+</li>
+<li><p><strong>使用 VNC</strong>:</p>
+<ul>
+<li>另一种选择是使用 VNC（Virtual Network Computing）。您可以安装 VNC 服务器（如 TigerVNC）并配置它以便远程访问：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnf install tigervnc-server</span><br></pre></td></tr></table></figure></li>
+<li>配置 VNC 服务器后，您可以使用 VNC 客户端连接到服务器。</li>
+</ul>
+</li>
+<li><p><strong>使用 Web 界面管理工具</strong>:</p>
+<ul>
+<li>还有一些基于 Web 的管理工具（如 Cockpit），可以提供图形化的管理界面。您可以安装 Cockpit：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dnf install cockpit</span><br><span class="line">systemctl <span class="built_in">enable</span> --now cockpit.socket</span><br></pre></td></tr></table></figure></li>
+<li>然后通过浏览器访问 <code>http://&lt;your-server-ip&gt;:9090</code> 来管理您的服务器。</li>
+</ul>
+</li>
+</ol>
+<p>请注意，安装和使用图形界面可能会增加系统的资源消耗，因此在选择使用 GUI 时，请确保您的云服务器有足够的资源（CPU、内存等）来支持它。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+     
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/27/My-New-Post/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -441,9 +565,15 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -507,7 +637,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">0k</span>
+    <span title="站点总字数">2k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
@@ -518,7 +648,7 @@
   </div>
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共131字</span>
+  <span class="post-count">博客全站共930字</span>
 </div>
 
     <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
